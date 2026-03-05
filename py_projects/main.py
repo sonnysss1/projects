@@ -7,4 +7,4 @@ for i in range(1, 21):
     if i == 13:
         continue
     else:
-        print("Iteration number: ", i)
+        print("Iteration number is: ", i)
