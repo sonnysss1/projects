@@ -1,0 +1,33 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.middle-sonny {
+    display: grid;
+    justify-items: center; /* centers left-right */
+    padding-top: 10vh;     /* move down a bit from top */
+}
+
+.sub-section {
+    display: grid;
+    justify-items: center;
+}
+
+.github {
+    display: grid;
+    justify-items: center;
+}
+
+.about-me {
+    display: grid;
+    justify-items: center;
+}
+
+.return {
+    display: grid;
+    justify-items: center;
+    padding-top: 10vh;
+}
+
+

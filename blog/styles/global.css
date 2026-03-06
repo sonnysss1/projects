@@ -1,0 +1,17 @@
+
+* {
+    font-family: 'Google Sans Flex', sans-serif, monospace;
+    font-size: 30px;
+}
+
+.middle-sonny,
+.sub-section,
+.about-me,
+.github {
+  margin-bottom: 16px; /* adjust number to taste */
+}
+
+a:link, a:visited {
+    color: inherit;
+    text-decoration: none;
+}
