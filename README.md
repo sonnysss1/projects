@@ -23,6 +23,5 @@ Depending on the project, I might use:
 
 ##  Notes to Self
 
-- Don’t be afraid to start small
-- Commit often
+- Try your best
 ---

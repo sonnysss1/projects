@@ -3,5 +3,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 @app.get("/")
+
 def root():
-    return {"message" : "Habit Tracker API running"}    
+    return {"message": "Habit Tracker API is running my gee"}    
+
