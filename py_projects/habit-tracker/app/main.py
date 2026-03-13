@@ -1,51 +1,47 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template, url_for, redirect
 from app.models import Habit
 from app.database import db
 
 bp = Blueprint("main", __name__)
 
+
 @bp.route("/")
 def home():
-    return "Brick by brick..."
-
-@bp.route("/habits")
-def get_habits():
     habits = Habit.query.order_by(Habit.created_at.desc()).all()
-    return jsonify(
-        [
-            {
-                "id": h.id,
-                "name": h.name,
-                "description": h.description,
-                "created_at": h.created_at.isoformat() if h.created_at else None,
-            }
-            for h in habits
-        ]
-    )
+    return render_template("index.html", habits=habits)
 
-@bp.route("/habits", methods=["POST"])
-def make_habit():
-    data = request.get_json(silent=True) or {}
 
-    name = (data.get("name") or "").strip()
-    description = data.get("description")
-
+@bp.route("/habits/add", methods=["POST"])
+def add_habit_form():
+    name = (request.form.get("name")).strip()
+    description = (request.form.get("description"))
     if not name:
-        return jsonify({"Error": "name is required"}), 400
-
+        return redirect(url_for("main.home"))
     habit = Habit(name=name, description=description)
-
     db.session.add(habit)
     db.session.commit()
 
-    return (
-        jsonify(
-            {
-                "id": habit.id,
-                "name": habit.name,
-                "description": habit.description,
-                "created_at": habit.created_at.isoformat() if habit.created_at else None,
-            }
-        ),
-        201,
-    )
+    return redirect(url_for("main.home"))
+
+@bp.route("/habits/<int:id>/edit", methods=["GET", "POST"])
+def edit_habit(id):
+    habit = Habit.query.get_or_404(id)
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        description = request.form.get("description", "")
+
+        if name:
+            habit.name = name
+        habit.description = description
+        db.session.commit()
+        return redirect(url_for("main.home"))
+    return render_template("edit.html", habit=habit)
+
+
+@bp.route("/habits/<int:id>/delete", methods=["POST"])
+def delete_habit(id):
+    habit = Habit.query.get_or_404(id)
+    db.session.delete(habit)
+    db.session.commit()
+    return redirect(url_for("main.home"))
