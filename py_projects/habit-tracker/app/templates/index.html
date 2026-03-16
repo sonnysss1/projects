@@ -7,10 +7,9 @@
     <h2>Add habit</h2>
     <form action="{{ url_for('main.add_habit_form') }}" method ="post">
         <label for="name">Habit Name:</label>
-        <input type="text" id="name" name="name" required>
-
+        <input type="text" id="name" name="name" maxlength="50" required>
         <label for="description">Description</label>
-        <input type="text" id="description" name="description" required>
+        <input type="text" id="description" name="description" max="50" required>
 
         <button type="submit">Add habit</button>
 
@@ -31,7 +30,9 @@
         {% for habit in habits %}
         <tr>
             <td>{{ habit.name }}</td>
-            <td>{{ habit.description or '-' }}</td>
+            <td title="{{ habit.description}}">
+                {{ habit.description }}
+            </td>
             <td>{{ habit.created_at.strftime('%Y-%m-%d') if habit.created_at else '-' }}</td>
             <td>
                 <form action="{{ url_for('main.edit_habit', id=habit.id) }}">

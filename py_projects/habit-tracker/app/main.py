@@ -1,4 +1,5 @@
-from flask import Blueprint, jsonify, request, render_template, url_for, redirect
+from multiprocessing import Value
+from flask import Blueprint, jsonify, request, render_template, url_for, redirect, flash
 from app.models import Habit
 from app.database import db
 
@@ -15,11 +16,17 @@ def home():
 def add_habit_form():
     name = (request.form.get("name")).strip()
     description = (request.form.get("description"))
+
     if not name:
         return redirect(url_for("main.home"))
-    habit = Habit(name=name, description=description)
-    db.session.add(habit)
-    db.session.commit()
+
+    try:
+        habit = Habit(name=name, description=description)
+        db.session.add(habit)
+        db.session.commit()
+        flash("Habit added successfully!", "success")
+    except ValueError as e:
+        flash(str(e), "error")
 
     return redirect(url_for("main.home"))
 
@@ -33,9 +40,16 @@ def edit_habit(id):
 
         if name:
             habit.name = name
-        habit.description = description
-        db.session.commit()
+
+        try:
+            habit.description = description
+            db.session.commit()
+            flash("Edited habit successfully!", "success")
+        except ValueError as e:
+            flash(str(e), "error")
+
         return redirect(url_for("main.home"))
+
     return render_template("edit.html", habit=habit)
 
 

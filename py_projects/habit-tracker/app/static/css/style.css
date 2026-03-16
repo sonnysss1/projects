@@ -26,3 +26,55 @@ footer {
 main { 
     min-height: 40vh; 
 }
+
+table {
+    width: 50%;
+    table-layout: fixed;
+
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    font-weight: 600;
+}
+
+/* control table contents in the cell */
+
+td {
+    max-width: 200px;
+    overflow: hidden;
+  }
+
+td .habit-description {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;      /* keep in one line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+
+}
+
+/* flash error */
+
+.flash {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
