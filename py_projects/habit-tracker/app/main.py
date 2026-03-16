@@ -38,15 +38,19 @@ def edit_habit(id):
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "")
 
-        if name:
-            habit.name = name
 
         try:
+            if name:
+                habit.name = name
+
             habit.description = description
             db.session.commit()
-            flash("Edited habit successfully!", "success")
+            flash("Habit has been updated!", "success")
         except ValueError as e:
+            db.session.rollback()
             flash(str(e), "error")
+            #stay on the edit page if error occurs
+            return render_template("edit.html", habit=habit)    
 
         return redirect(url_for("main.home"))
 
