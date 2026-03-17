@@ -57,9 +57,14 @@ def edit_habit(id):
     return render_template("edit.html", habit=habit)
 
 
-@bp.route("/habits/<int:id>/delete", methods=["POST"])
+@bp.route("/habits/<int:id>/delete", methods=["GET", "POST"])
 def delete_habit(id):
     habit = Habit.query.get_or_404(id)
-    db.session.delete(habit)
-    db.session.commit()
-    return redirect(url_for("main.home"))
+
+    if request.method == "POST":
+        db.session.delete(habit)
+        db.session.commit()
+        flash("Habit has been deleted!", "success")
+        return redirect(url_for("main.home"))
+
+    return render_template("delete.html", habit=habit)

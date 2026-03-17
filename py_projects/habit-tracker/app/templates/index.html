@@ -38,9 +38,7 @@
                 <form action="{{ url_for('main.edit_habit', id=habit.id) }}">
                     <button>Edit</button>
                 </form>
-                <form action="{{ url_for('main.delete_habit', id=habit.id) }}" method="post" style="display:inline;">
-                    <button type="submit" onclick="return confirm('Delete this habit?');">Delete</button>
-                </form>
+                <a href="{{ url_for('main.delete_habit', id=habit.id) }}"><button>Delete</button></a>
             </td>
         </tr>
         {% else %}
