@@ -4,27 +4,19 @@
     <h1>Habit Tracker</h1>
     <h2>Habit Table</h2>
 
-    <h2>Add habit</h2>
-    <form action="{{ url_for('main.add_habit_form') }}" method ="post">
+    <form id = "add-habit-form" action="{{ url_for('main.add_habit_form') }}" method ="post">
         <label for="name">Habit Name:</label>
-        <input type="text" id="name" name="name" maxlength="50" required>
+        <input type="text" id="name" name="name" maxlength="50" required placeholder="e.g. Workout at the gym">
         <label for="description">Description</label>
-        <input type="text" id="description" name="description" max="50" required>
-
+        <input type="text" id="description" name="description" maxlength="50" required placeholder="A short description">
         <button type="submit">Add habit</button>
-
-
-
     </form>
 
-
-
-
-    <table>
+    <table id ="habit-table">
         <tr>
             <th>Habit</th>
             <th>Description</th>
-            <th>Date</th>
+            <th>Date Added</th>
             <th>Actions</th>
         </tr>
         {% for habit in habits %}
@@ -36,9 +28,9 @@
             <td>{{ habit.created_at.strftime('%Y-%m-%d') if habit.created_at else '-' }}</td>
             <td>
                 <form action="{{ url_for('main.edit_habit', id=habit.id) }}">
-                    <button>Edit</button>
+                    <button class="button-edit">Edit</button>
                 </form>
-                <a href="{{ url_for('main.delete_habit', id=habit.id) }}"><button>Delete</button></a>
+                <a href="{{ url_for('main.delete_habit', id=habit.id) }}"><button class="button-delete">Delete</button></a>
             </td>
         </tr>
         {% else %}
