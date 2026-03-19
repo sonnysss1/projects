@@ -12,23 +12,31 @@ def home():
     return render_template("index.html", habits=habits)
 
 
-@bp.route("/habits/add", methods=["POST"])
-def add_habit_form():
-    name = (request.form.get("name")).strip()
-    description = (request.form.get("description"))
+@bp.route("/habits/add", methods=["GET","POST"])
+def add_habit():
 
-    if not name:
+    if request.method == "POST":
+        name = (request.form.get("name")).strip()
+        description = (request.form.get("description"))
+
+        if not name:
+            flash("A name is required.", "error")
+            return redirect(url_for("add_habit.html"))
+
+        try:
+            habit = Habit(name=name, description=description)
+            db.session.add(habit)
+            db.session.commit()
+            flash("Habit added successfully!", "success")
+        except ValueError as e:
+            flash(str(e), "error")
+            return render_template("add_habit.html")
+
         return redirect(url_for("main.home"))
 
-    try:
-        habit = Habit(name=name, description=description)
-        db.session.add(habit)
-        db.session.commit()
-        flash("Habit added successfully!", "success")
-    except ValueError as e:
-        flash(str(e), "error")
+    return render_template("add_habit.html")
 
-    return redirect(url_for("main.home"))
+
 
 @bp.route("/habits/<int:id>/edit", methods=["GET", "POST"])
 def edit_habit(id):

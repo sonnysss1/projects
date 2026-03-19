@@ -3,16 +3,22 @@
 {% block title %}Edit Habit{% endblock %}
 
 {% block content %}
+<div class="edit-container">
     <h2>Edit Habit</h2>
 
-    <form action="{{ url_for('main.edit_habit', id=habit.id) }}" method="post">
-        <label for="name">Habit Name:</label>
-        <input type="text" id="name" name="name" value="{{ habit.name }}" required>
+<form action="{{ url_for('main.edit_habit', id=habit.id) }}" method="post">
+    <label for="name">Enter your new habit </label>
+    <input type="text" id="name" name="name" value="{{ habit.name }}" required>
 
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="{{ habit.description or '' }}">
-
-        <button type="submit">Save Changes</button>
-        <a href="{{ url_for('main.home') }}">Cancel</a>
-    </form>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" value="{{ habit.description or '' }}">
+    
+    <div class="edit-actions">
+        <button type="submit" class="save-button">Save</button>
+        <a href="{{ url_for('main.home') }}">
+            <button type="button" class="cancel-button">Cancel</button>
+         </a>
+    </div>
+</div>
+</form>
 {% endblock %}
