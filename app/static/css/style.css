@@ -1,0 +1,178 @@
+* { 
+    box-sizing: border-box; 
+}
+
+body { 
+    font-family: system-ui, sans-serif; 
+    margin: 0; 
+    padding: 1rem; 
+}
+
+header { 
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem; 
+    margin-bottom: 1rem; 
+}
+
+nav a { 
+    margin-right: 
+    1rem; 
+}
+
+footer { 
+    margin-top: 2rem; color: #666; 
+    font-size: 0.9rem; 
+}
+
+main { 
+    min-height: 40vh; 
+}
+
+table {
+    margin-left: 0;
+    width: 50%;
+    table-layout: fixed;
+
+}
+
+#add-habit-form    {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    font-weight: 600;
+}
+
+
+
+/* control table contents in the cell */
+td {
+    max-width: 200px;
+    overflow: hidden;
+  }
+
+td .habit-description {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;      /* keep in one line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+
+}
+
+/* habit form */
+
+
+
+/* Add, Edit, Delete, and Cancel buttons */
+
+.button-edit {
+    width:70px;
+    background-color: #f0f0f0;
+    border: 1px solid black;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+.button-delete {
+    width:70px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid black;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+}
+
+.add-button {
+    width:70px;
+    background-color: #f0f0f0;
+    border: 1px solid black;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+.save-button {
+    width:70px;
+    background-color: #f0f0f0;
+    border: 1px solid black;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+.cancel-button {
+    width:70px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid black;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+}
+
+
+/* flash error */
+
+.flash {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* edit container */
+
+.edit-container {
+    max-width: 500px;
+    margin: 2rem auto; 
+    padding: 1rem;
+    border: 1px solid #ccc;
+}
+
+.edit-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 10px;
+}
+
+.edit-actions a {
+    display: flex;
+    text-decoration: none;
+}
+
+.edit-actions a button {
+    flex: 1;
+}
+
+
+.edit-actions a, 
+.edit-actions button {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+}

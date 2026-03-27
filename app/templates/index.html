@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Habit Tracker</h1>
+    <h2>Habit Table</h2>
+
+    <a href="{{ url_for('main.add_habit')}}">
+        <button class="add-button">Add Habit</button>
+    </a>
+
+    <table id ="habit-table">
+        <tr>
+            <th>Habit</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for habit in habits %}
+        <tr>
+            <td>{{ habit.name }}</td>
+            <td title="{{ habit.description}}">
+                {{ habit.description }}
+            </td>
+            <td>{{ habit.created_at.strftime('%Y-%m-%d') if habit.created_at else '-' }}</td>
+            <td>
+                <form action="{{ url_for('main.edit_habit', id=habit.id) }}">
+                    <button class="button-edit">Edit</button>
+                </form>
+                <a href="{{ url_for('main.delete_habit', id=habit.id) }}"><button class="button-delete">Delete</button></a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">No habits yet.</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

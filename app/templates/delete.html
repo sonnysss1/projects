@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Confirm Delete{% endblock %}
+{% block content %}
+    <h1>Delete Habit</h1>
+    <p>Are you sure you want to delete <strong>{{ habit.name }}</strong>?</p>
+    <form action="{{ url_for('main.delete_habit', id=habit.id) }}" method="post">
+        <button type="submit">Yes, Delete</button>
+    </form>
+    <a href="{{ url_for('main.home') }}">Cancel</a>
+{% endblock %}
